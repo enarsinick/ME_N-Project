@@ -14,3 +14,4 @@ const beerSchema = new Schema({
 const Beer = model('Beer', beerSchema);
 
 module.exports = { 'Beer': Beer };
+

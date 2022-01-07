@@ -4,6 +4,8 @@ const mongoose = require('mongoose');
 
 const app = express();
 
+const beerRoutes = require('./routes/beerRoutes');
+
 app.use(express.json());
 app.use(cors());
 
@@ -16,6 +18,18 @@ mongoose.connect('mongodb://localhost:27017/petes-beer', { useNewUrlParser: true
         }
     }
 );
+
+app.use((req, res, next) => {
+    const date = new Date().toLocaleDateString("en-GB", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+    });
+    console.log(`The current date is: ${date}`);
+    next();
+});
+
+app.use("/beers", beerRoutes);
 
 
 
